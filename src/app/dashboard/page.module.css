@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    padding: 10px;
+}
+
+.selectContainer {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    /* border: 1px solid var(--foreground); */
+    /* width: 100%; */
+}
+
+.comparacionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prediosContainer {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sectoresContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 180px;
+}
+
+.atributosContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.resultsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.toggleContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.dataContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap : 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px;
+}
+
+.maxwidthGraphContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 350px;
+    width: 100%;
+    max-width: 1000px;
+    /* overflow-x: auto; */
+}
+
+.halfwidthGraphContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 350px;
+    width: 100%;
+    max-width: 600px;
+    /* overflow-x: auto; */
+}
