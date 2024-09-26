@@ -147,51 +147,63 @@ const Dashboard = () => {
     { area: 250, water_consumption_lugar1: 45, water_consumption_lugar2: 38 },
     { area: 300, water_consumption_lugar1: 60, water_consumption_lugar2: 50 },
   ];
+  const dataset2 = [
+    { area: 50, water_consumption_lugar1: 13, water_consumption_lugar2: 2 },
+    { area: 100, water_consumption_lugar1: 10, water_consumption_lugar2: 11 },
+    { area: 150, water_consumption_lugar1: 30, water_consumption_lugar2: 27 },
+    { area: 200, water_consumption_lugar1: 28, water_consumption_lugar2: 35 },
+    { area: 250, water_consumption_lugar1: 45, water_consumption_lugar2: 70 },
+    { area: 300, water_consumption_lugar1: 80, water_consumption_lugar2: 56 },
+  ];
 
   // Estado para gráficos y tablas
-  const [activeGraphs, setActiveGraphs] = useState(true);
-  const [activeTables, setActiveTables] = useState(false);
+  const [activeGraphs, setActiveGraphs] = useState(false);
+  const [activeTables, setActiveTables] = useState(true);
 
 
-  const [dataDisplayStyle, setDataDisplayStyle] = useState(styles.maxwidthGraphContainer);
+  const [graphDisplayStyle, setGraphDisplayStyle] = useState(styles.maxwidthGraphContainer);
+  const [tableDisplayStyle, setTableDisplayStyle] = useState(styles.maxwidthGraphContainer);
 
-  const handleChartClick = () => {
-    setDataDisplayStyle(styles.maxwidthGraphContainer);
-    setActiveGraphs(true);
-    setActiveTables(false);
-  };
+  // const handleChartClick = () => {
+  //   setGraphDisplayStyle(styles.maxwidthGraphContainer);
+  //   setTableDisplayStyle(styles.maxwidthGraphContainer);
+  //   setActiveGraphs(true);
+  //   setActiveTables(false);
+  // };
 
-  const handleTableClick = () => {
-    setDataDisplayStyle(styles.maxwidthGraphContainer);
-    setActiveTables(true);
-    setActiveGraphs(false);
-  };
+  // const handleTableClick = () => {
+  //   setGraphDisplayStyle(styles.maxwidthGraphContainer);
+  //   setTableDisplayStyle(styles.maxwidthGraphContainer);
+  //   setActiveTables(true);
+  //   setActiveGraphs(false);
+  // };
 
-  const handleBothClick = () => {
-    setDataDisplayStyle(styles.halfwidthGraphContainer);
-    setActiveGraphs(true);
-    setActiveTables(true);
+  // const handleBothClick = () => {
+  //   setGraphDisplayStyle(styles.halfwidthGraphContainer);
+  //   setTableDisplayStyle(styles.halfwidthTableContainer);
+  //   setActiveGraphs(true);
+  //   setActiveTables(true);
 
-  };
+  // };
 
   //tabla
   const columns = [
     // { id: '', label: '', minWidth: 80 },
     { id: 'month', label: 'Mes', minWidth: 80 },
-    { id: 'superficial', label: 'Superficial', minWidth: 80, align: 'center' },
-    { id: 'pozo', label: 'Pozo', minWidth: 80, align: 'center' },
-    { id: 'subTotal', label: 'SubTotal', minWidth: 80, align: 'center' },
-    { id: 'agricolas', label: 'Agricolas', minWidth: 80, align: 'center' },
-    { id: 'arriendo', label: 'Arriendo', minWidth: 80, align: 'center' },
-    { id: 'usoForestal', label: '', minWidth: 80, align: 'center' },
+    { id: 'superficial', label: 'Superficial', minWidth: 80, align: 'center', format: (value) => value.toLocaleString('en-US') },
+    { id: 'pozo', label: 'Pozo', minWidth: 80, align: 'center', format: (value) => value.toLocaleString('en-US') },
+    { id: 'subTotal', label: 'SubTotal', minWidth: 80, align: 'center', format: (value) => value.toLocaleString('en-US') },
+    { id: 'agricolas', label: 'Agricolas', minWidth: 80, align: 'center', format: (value) => value.toLocaleString('en-US') },
+    { id: 'arriendo', label: 'Arriendo', minWidth: 80, align: 'center', format: (value) => value.toLocaleString('en-US') },
+    { id: 'usoForestal', label: '', minWidth: 80, align: 'center', format: (value) => value.toLocaleString('en-US') },
   ];
-  
+
   // Definición de los datos
   function createData(month, superficial, pozo, subTotal, agricolas, arriendo, usoForestal) {
     // const density = population / size;
     return { month, superficial, pozo, subTotal, agricolas, arriendo, usoForestal };
   }
-  
+
   const data = [
     createData('Sep', '-', 53890, 53890, 53890, '-', '-'),
     createData('Oct', '-', 258877, 258877, 258877, '-', '-'),
@@ -203,8 +215,8 @@ const Dashboard = () => {
     createData('Abr', '-', '-', '-', '-', '-', '-'),
     createData('Total', 14446745, 2963909, 17410654, 9399865, '-', 8010789),
   ];
-  
-  
+
+
   // Definición de la agrupación de columnas
   const columnGroups = [
     { label: '', colSpan: 1 },
@@ -212,6 +224,38 @@ const Dashboard = () => {
     { label: 'Salida', colSpan: 3 },
     { label: 'Uso Forestal', colSpan: 1 },
   ];
+
+  // handle graphs & table
+  const [dataDisplayMode, setDataDisplayMode] = useState('tables');
+  const [dataComponents, setDataComponents] = useState([{ id: 1 }]);
+
+  const handleChartClick = () => {
+    setDataDisplayMode('charts');
+    setGraphDisplayStyle(styles.maxwidthGraphContainer);
+    setTableDisplayStyle(styles.maxwidthGraphContainer);
+  };
+
+  const handleTableClick = () => {
+    setDataDisplayMode('tables');
+    setGraphDisplayStyle(styles.maxwidthGraphContainer);
+    setTableDisplayStyle(styles.maxwidthGraphContainer);
+  };
+
+  const handleBothClick = () => {
+    setDataDisplayMode('both');
+    setGraphDisplayStyle(styles.halfwidthGraphContainer);
+    setTableDisplayStyle(styles.halfwidthTableContainer);
+  };
+
+  const handleAddComponent = () => {
+    const newId = Math.max(...dataComponents.map(comp => comp.id), 0) + 1;
+    setDataComponents([...dataComponents, { id: newId }]);
+  };
+
+  const handleRemoveComponent = (id) => {
+    setDataComponents(dataComponents.filter(comp => comp.id !== id));
+  };
+
 
   return (
     <div className={styles.container}>
@@ -278,40 +322,61 @@ const Dashboard = () => {
         </div>
 
         <div className={styles.resultsContainer}>
+
+          <div className={styles.addComponentContainer}>
+            <button onClick={handleAddComponent} className={styles.addComponentButton}>
+              Realizar consulta
+            </button>
+          </div>
+
           <div className={styles.toggleContainer}>
+
             <ToggleDataDisplay
               onChartClick={handleChartClick}
               onTableClick={handleTableClick}
               onBothClick={handleBothClick}
             />
           </div>
-          <div className={styles.dataContainer}>
-            {/* Mostrar gráficos */}
-            {/* Placeholder para la tabla */}
-            {activeTables && (
-              <div className={dataDisplayStyle}>
-                {/* <h3>Tabla de datos</h3> */}
-                <BasicTable columns={columns} columnGroups={columnGroups} data={data} />
-              </div>
-            )}
-            {activeGraphs && (
-              <div className={dataDisplayStyle}>
-                <BasicLineChart
-                  dataset={dataset}
-                  xAxis_data={xAxis_data}
-                  yAxis_title={yAxis_title}
-                  yAxis_data={yAxis_data}
-                />
-                <BasicLineChart
-                  dataset={dataset}
-                  xAxis_data={xAxis_data}
-                  yAxis_title={yAxis_title}
-                  yAxis_data={yAxis_data}
-                />
-              </div>
-            )}
-          </div>
 
+          {dataComponents.map((component) => (
+            <div key={component.id} className={styles.dataComponent}>
+              
+              <div className={styles.dataContainer}>
+
+                {(dataDisplayMode === 'tables' || dataDisplayMode === 'both') && (
+                  <div className={dataDisplayMode === 'both' ? styles.halfwidthTableContainer : styles.maxwidthGraphContainer}>
+                    <BasicTable columns={columns} columnGroups={columnGroups} data={data} />
+                  </div>
+                )}
+                {(dataDisplayMode === 'charts' || dataDisplayMode === 'both') && (
+                  <div className={dataDisplayMode === 'both' ? styles.halfwidthGraphContainer : styles.maxwidthGraphContainer}>
+                    <h3>Gráfico 1</h3>
+                    <BasicLineChart
+                      dataset={dataset}
+                      xAxis_data={xAxis_data}
+                      yAxis_title={yAxis_title}
+                      yAxis_data={yAxis_data}
+                    />
+                    <h3>Gráfico 2</h3>
+                    <BasicLineChart
+                      dataset={dataset2}
+                      xAxis_data={xAxis_data}
+                      yAxis_title={yAxis_title}
+                      yAxis_data={yAxis_data}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <button
+                onClick={() => handleRemoveComponent(component.id)}
+                className={styles.removeComponentButton}
+              >
+                X
+              </button>
+
+            </div>
+          ))}
         </div>
       </Maincard>
     </div>

@@ -68,7 +68,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: flex-start;
-    gap : 10px;
+    gap: 10px;
     overflow-x: auto;
     overflow-y: hidden;
     padding: 10px;
@@ -92,6 +92,56 @@
     align-items: center;
     min-width: 350px;
     width: 100%;
-    max-width: 600px;
+    max-width: 400px;
     /* overflow-x: auto; */
+}
+
+.halfwidthTableContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 350px;
+    width: 100%;
+    max-width: 800px;
+    /* overflow-x: auto; */
+}
+
+.addComponentContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.addComponentButton {
+    width: auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--background);
+    background-color: green;
+    color: var(--background-contrast);
+    cursor: pointer;
+}
+
+.removeComponentButton {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    padding: 2px;
+    border-radius: 5px;
+    border: 1px solid var(--background);
+    /* color: var(--background-contrast); */
+    cursor: pointer;
+}
+
+.dataComponent {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: baseline;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
 }

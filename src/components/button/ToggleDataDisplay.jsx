@@ -7,7 +7,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 export default function ToggleDataDisplay({ onChartClick, onTableClick, onBothClick }) {
-  const [view, setView] = React.useState(() => ['chart']); // Valor inicial: 'chart'
+  const [view, setView] = React.useState(() => ['table']); // Valor inicial: 'chart'
 
   const handleViewChange = (event, newView) => {
     if (newView.length > 0) {
