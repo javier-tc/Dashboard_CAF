@@ -9,11 +9,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const links = [
-  // {
-  //   name: "Home",
-  //   path: "/",
-  //   icon: <HomeIcon />
-  // },
+  {
+    name: "Home",
+    path: "/",
+    icon: <HomeIcon />
+  },
   {
     name: "Dashboard",
     path: "/dashboard",

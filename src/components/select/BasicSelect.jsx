@@ -8,7 +8,28 @@ import Select from '@mui/material/Select';
 export default function BasicSelect({ label, options, value, onChange }) {
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl 
+        fullWidth
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: 'var(--foreground)', // Color por defecto
+            },
+            '&:hover fieldset': {
+              borderColor: 'var(--secondary)', // Color al pasar el cursor
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: 'var(--primary)', // Color cuando está seleccionado
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: 'var(--foreground)', // Color del label por defecto
+            '&.Mui-focused': {
+              color: 'var(--primary)', // Color del label cuando está enfocado
+            },
+          },
+        }}
+        >
         <InputLabel
           id="basic-select-label"
           sx={{

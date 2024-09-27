@@ -8,7 +8,8 @@ const Maincard = ({children}) => {
     <div className={styles.container}>
         <Card
             sx={{
-                padding: '20px'
+                padding: '20px',
+                boxShadow: 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px',
             }}
         >
             {children}

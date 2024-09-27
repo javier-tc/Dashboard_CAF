@@ -6,6 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -13,7 +15,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      // width: 250,
     },
   },
 };
@@ -29,7 +31,30 @@ export default function MultipleSelectCheckmarks({ label, options, selectedValue
   };
 
   return (
-    <FormControl sx={{ m: 0, width: '100%' }}>
+    <FormControl
+      sx={{
+        m: 0,
+        // width: '100%',
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: 'var(--foreground)', // Color por defecto
+          },
+          '&:hover fieldset': {
+            borderColor: 'var(--secondary)', // Color al pasar el cursor
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: 'var(--primary)', // Color cuando está seleccionado
+          },
+        },
+        '& .MuiInputLabel-root': {
+          color: 'var(--foreground)', // Color del label por defecto
+          '&.Mui-focused': {
+            color: 'var(--primary)', // Color del label cuando está enfocado
+          },
+        },
+      }}
+    // variant='filled'
+    >
       <InputLabel id="multiple-checkbox-label">{label}</InputLabel>
       <Select
         labelId="multiple-checkbox-label"
@@ -38,7 +63,14 @@ export default function MultipleSelectCheckmarks({ label, options, selectedValue
         value={selectedValues}
         onChange={handleChange}
         input={<OutlinedInput label={label} />}
-        renderValue={(selected) => selected.join(', ')}
+        renderValue={(selected) => (
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            {selected.map((value) => (
+              <Chip key={value} label={value} />
+            ))}
+          </Box>
+        )}
+
         MenuProps={MenuProps}
       >
         {options.map((option) => (

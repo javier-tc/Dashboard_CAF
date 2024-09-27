@@ -30,6 +30,23 @@ export default function ToggleDataDisplay({ onChartClick, onTableClick, onBothCl
       onChange={handleViewChange}
       aria-label="view toggle"
       exclusive // Solo permite una opción activa a la vez
+      sx={{
+        '& .MuiToggleButtonGroup-grouped': {
+          color: 'var(--tertiary)',
+          '&.Mui-selected': {
+            color: 'var(--background-contrast)',
+            backgroundColor: 'var(--primary)',
+            '&:hover': {
+              color: 'var(--background-contrast)',
+              backgroundColor: 'var(--secondary)',
+            },
+          },
+          '&:hover': {
+            color: 'var(--background-contrast)',
+            backgroundColor: 'var(--secondary)',
+          },
+        }
+      }}
     >
       <ToggleButton value="table" aria-label="table view">
         <TableChartIcon />

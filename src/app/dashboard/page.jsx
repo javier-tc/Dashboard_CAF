@@ -259,19 +259,21 @@ const Dashboard = () => {
 
   return (
     <div className={styles.container}>
-      <Maincard>
-        <h2>Dashboard</h2>
+      <div className={styles.titleContainer}>
+        <h2> Dashboard </h2>
         <hr />
+      </div>
+      <Maincard>
         <div className={styles.selectContainer}>
           <div className={styles.comparacionContainer}>
-            <h3>Años</h3>
+            {/* <h3>Años</h3> */}
             <BasicSelect
               label="Comparación entre años"
               options={years}
               value={selectedYear}
               onChange={handleChangeYear}
             />
-            <h3>Fundos</h3>
+            {/* <h3>Fundos</h3> */}
             <BasicSelect
               label="Comparación entre fundos"
               options={fundos}
@@ -280,7 +282,7 @@ const Dashboard = () => {
             />
           </div>
           <div className={styles.prediosContainer}>
-            <h3>Predios</h3>
+            {/* <h3>Predios</h3> */}
             <MultipleSelectCheckmarks
               label="Predios"
               options={predios}
@@ -289,7 +291,7 @@ const Dashboard = () => {
             />
           </div>
           <div className={styles.sectoresContainer}>
-            <h3>Sectores</h3>
+            {/* <h3>Sectores</h3> */}
             {selectedPredios.length > 0 ? (
               selectedPredios.map((predio) => (
                 <BasicSelect
@@ -305,7 +307,7 @@ const Dashboard = () => {
             )}
           </div>
           <div className={styles.atributosContainer}>
-            <h3>Atributos</h3>
+            {/* <h3>Atributos</h3> */}
             <BasicSelect
               label="Atributo 1"
               options={atributos1}
@@ -320,14 +322,17 @@ const Dashboard = () => {
             />
           </div>
         </div>
+        <div className={styles.addComponentContainer}>
+          <button onClick={handleAddComponent} className={styles.addComponentButton}>
+            Realizar consulta
+          </button>
+        </div>
+      </Maincard>
 
+      <Maincard>
         <div className={styles.resultsContainer}>
 
-          <div className={styles.addComponentContainer}>
-            <button onClick={handleAddComponent} className={styles.addComponentButton}>
-              Realizar consulta
-            </button>
-          </div>
+
 
           <div className={styles.toggleContainer}>
 
@@ -340,7 +345,7 @@ const Dashboard = () => {
 
           {dataComponents.map((component) => (
             <div key={component.id} className={styles.dataComponent}>
-              
+
               <div className={styles.dataContainer}>
 
                 {(dataDisplayMode === 'tables' || dataDisplayMode === 'both') && (
