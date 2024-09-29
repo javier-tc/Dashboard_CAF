@@ -11,6 +11,9 @@ import MultipleSelectCheckmarks from '@/components/select/MultipleSelectCheckmar
 import ToggleDataDisplay from '@/components/button/ToggleDataDisplay'; // El componente toggle para alternar entre gráficos y tablas
 import BasicTable from '@/components/table/BasicTable';
 
+//icon
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+
 // Importar el componente dinámicamente solo en el cliente
 const BasicLineChart = dynamic(() => import('@/components/charts/BasicLineChart'), { ssr: false });
 
@@ -264,126 +267,122 @@ const Dashboard = () => {
         <hr />
       </div>
       <Maincard>
-        <div className={styles.selectContainer}>
-          <div className={styles.comparacionContainer}>
-            {/* <h3>Años</h3> */}
-            <BasicSelect
-              label="Comparación entre años"
-              options={years}
-              value={selectedYear}
-              onChange={handleChangeYear}
-            />
-            {/* <h3>Fundos</h3> */}
-            <BasicSelect
-              label="Comparación entre fundos"
-              options={fundos}
-              value={selectedFundo}
-              onChange={handleChangeFundo}
-            />
+        <div className={styles.fetchDataContainer}>
+          <div className={styles.selectGroupContainer}>
+            <div className={styles.selectContainer}>
+              {/* <h3>Años</h3> */}
+              <BasicSelect
+                label="Comparación entre años"
+                options={years}
+                value={selectedYear}
+                onChange={handleChangeYear}
+              />
+            </div>
+            <div className={styles.selectContainer}>
+              {/* <h3>Fundos</h3> */}
+              <BasicSelect
+                label="Comparación entre fundos"
+                options={fundos}
+                value={selectedFundo}
+                onChange={handleChangeFundo}
+              />
+            </div>
+            <div className={styles.selectContainer}>
+              {/* <h3>Predios</h3> */}
+              <MultipleSelectCheckmarks
+                label="Predios"
+                options={predios}
+                selectedValues={selectedPredios}
+                onChange={handleChangePredios}
+              />
+            </div>
+            <div className={styles.sectoresContainer}>
+              {/* <h3>Sectores</h3> */}
+              {selectedPredios.length > 0 ? (
+                selectedPredios.map((predio) => (
+                  <BasicSelect
+                    key={predio}
+                    label={`${predio}`}
+                    options={sectores[predio] || []}
+                    value={selectedSectores[predio] || ""}
+                    onChange={(event) => handleChangeSectores(predio, event)}
+                  />
+                ))
+              ) : (
+                <p>No hay predios seleccionados</p>
+              )}
+            </div>
+            <div className={styles.sectoresContainer}>
+              {/* <h3>Atributos</h3> */}
+              <BasicSelect
+                label="Atributo 1"
+                options={atributos1}
+                value={atributo1}
+                onChange={handleChangeAtributo1}
+              />
+              <BasicSelect
+                label="Atributo 2"
+                options={atributos2}
+                value={atributo2}
+                onChange={handleChangeAtributo2}
+              />
+            </div>
           </div>
-          <div className={styles.prediosContainer}>
-            {/* <h3>Predios</h3> */}
-            <MultipleSelectCheckmarks
-              label="Predios"
-              options={predios}
-              selectedValues={selectedPredios}
-              onChange={handleChangePredios}
-            />
+          <div className={styles.addComponentContainer}>
+            <button onClick={handleAddComponent} className={styles.addComponentButton}>
+              Realizar consulta
+            </button>
           </div>
-          <div className={styles.sectoresContainer}>
-            {/* <h3>Sectores</h3> */}
-            {selectedPredios.length > 0 ? (
-              selectedPredios.map((predio) => (
-                <BasicSelect
-                  key={predio}
-                  label={`${predio}`}
-                  options={sectores[predio] || []}
-                  value={selectedSectores[predio] || ""}
-                  onChange={(event) => handleChangeSectores(predio, event)}
-                />
-              ))
-            ) : (
-              <p>No hay predios seleccionados</p>
-            )}
-          </div>
-          <div className={styles.atributosContainer}>
-            {/* <h3>Atributos</h3> */}
-            <BasicSelect
-              label="Atributo 1"
-              options={atributos1}
-              value={atributo1}
-              onChange={handleChangeAtributo1}
-            />
-            <BasicSelect
-              label="Atributo 2"
-              options={atributos2}
-              value={atributo2}
-              onChange={handleChangeAtributo2}
-            />
-          </div>
-        </div>
-        <div className={styles.addComponentContainer}>
-          <button onClick={handleAddComponent} className={styles.addComponentButton}>
-            Realizar consulta
-          </button>
         </div>
       </Maincard>
+      <div className={styles.resultsContainer}>
+        <div className={styles.toggleContainer}>
+          <ToggleDataDisplay
+            onChartClick={handleChartClick}
+            onTableClick={handleTableClick}
+            onBothClick={handleBothClick}
+          />
+        </div>
+      </div>
 
-      <Maincard>
-        <div className={styles.resultsContainer}>
-
-
-
-          <div className={styles.toggleContainer}>
-
-            <ToggleDataDisplay
-              onChartClick={handleChartClick}
-              onTableClick={handleTableClick}
-              onBothClick={handleBothClick}
-            />
-          </div>
-
-          {dataComponents.map((component) => (
-            <div key={component.id} className={styles.dataComponent}>
-
-              <div className={styles.dataContainer}>
-
-                {(dataDisplayMode === 'tables' || dataDisplayMode === 'both') && (
-                  <div className={dataDisplayMode === 'both' ? styles.halfwidthTableContainer : styles.maxwidthGraphContainer}>
-                    <BasicTable columns={columns} columnGroups={columnGroups} data={data} />
-                  </div>
-                )}
-                {(dataDisplayMode === 'charts' || dataDisplayMode === 'both') && (
-                  <div className={dataDisplayMode === 'both' ? styles.halfwidthGraphContainer : styles.maxwidthGraphContainer}>
-                    <h3>Gráfico 1</h3>
-                    <BasicLineChart
-                      dataset={dataset}
-                      xAxis_data={xAxis_data}
-                      yAxis_title={yAxis_title}
-                      yAxis_data={yAxis_data}
-                    />
-                    <h3>Gráfico 2</h3>
-                    <BasicLineChart
-                      dataset={dataset2}
-                      xAxis_data={xAxis_data}
-                      yAxis_title={yAxis_title}
-                      yAxis_data={yAxis_data}
-                    />
-                  </div>
-                )}
-              </div>
-
+      <div className={styles.resultsContainer}>
+        {dataComponents.map((component) => (
+          <Maincard>
+            <div key={component.id} className={styles.dataContainer}>
               <button
                 onClick={() => handleRemoveComponent(component.id)}
                 className={styles.removeComponentButton}
               >
-                X
+                <HighlightOffIcon />
               </button>
-
+              {(dataDisplayMode === 'tables' || dataDisplayMode === 'both') && (
+                <div className={dataDisplayMode === 'both' ? styles.halfwidthTableContainer : styles.maxwidthGraphContainer}>
+                  <BasicTable columns={columns} columnGroups={columnGroups} data={data} />
+                </div>
+              )}
+              {(dataDisplayMode === 'charts' || dataDisplayMode === 'both') && (
+                <div className={dataDisplayMode === 'both' ? styles.halfwidthGraphContainer : styles.maxwidthGraphContainer}>
+                  <BasicLineChart
+                    title={'Gráfico 1'}
+                    dataset={dataset}
+                    xAxis_data={xAxis_data}
+                    yAxis_title={yAxis_title}
+                    yAxis_data={yAxis_data}
+                  />
+                  <BasicLineChart
+                    title={'Gráfico 2'}
+                    dataset={dataset2}
+                    xAxis_data={xAxis_data}
+                    yAxis_title={yAxis_title}
+                    yAxis_data={yAxis_data}
+                  />
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-      </Maincard>
+          </Maincard>
+        ))}
+      </div>
+
     </div>
   );
 };

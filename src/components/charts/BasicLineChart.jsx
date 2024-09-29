@@ -1,32 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { Paper } from '@mui/material';
+import React, { useRef } from 'react';
 import Chart from 'react-apexcharts';
 
-export default function BasicLineChart({ xAxis_data, yAxis_data, dataset, yAxis_title }) {
+import styles from './basiclinechart.module.css';
+
+export default function BasicLineChart({ title, xAxis_data, yAxis_data, dataset, yAxis_title }) {
   const chartRef = useRef(null);
-  const [chartDimensions, setChartDimensions] = useState({ width: '100%', height: 300 });
 
-  useEffect(() => {
-    // Función para ajustar el tamaño del gráfico según el tamaño del contenedor
-    const updateChartSize = () => {
-      if (chartRef.current) {
-        const width = chartRef.current.offsetWidth || '100%';
-        setChartDimensions({ width, height: 300 });
-      }
-    };
-
-    // Ajusta el tamaño del gráfico cuando la ventana cambie de tamaño
-    window.addEventListener('resize', updateChartSize);
-
-    // Ajusta el tamaño del gráfico inicialmente
-    updateChartSize();
-
-    // Limpia el evento cuando el componente se desmonte
-    return () => {
-      window.removeEventListener('resize', updateChartSize);
-    };
-  }, []);
-
-  // Convertimos los datos para ApexCharts
   const series = yAxis_data.map((yData) => ({
     name: yData.label,
     data: dataset.map((data) => data[yData.dataKey]),
@@ -35,10 +15,8 @@ export default function BasicLineChart({ xAxis_data, yAxis_data, dataset, yAxis_
   const options = {
     chart: {
       type: 'line',
-      height: chartDimensions.height,
-      width: chartDimensions.width,
       toolbar: {
-        show: false, // Oculta el toolbar si no es necesario
+        show: false,
       },
     },
     xaxis: {
@@ -55,41 +33,20 @@ export default function BasicLineChart({ xAxis_data, yAxis_data, dataset, yAxis_
         text: yAxis_title || 'Y Axis',
       },
     },
-    stroke: {
-      // curve: 'smooth', // Activa si prefieres líneas suaves
-    },
+    stroke: {},
     markers: {
       size: 4,
     },
-    responsive: [
-      {
-        breakpoint: 768, // Para pantallas medianas
-        options: {
-          chart: {
-            height: 250,
-          },
-          markers: {
-            size: 3, // Reduce el tamaño de los puntos en pantallas más pequeñas
-          },
-        },
-      },
-      {
-        breakpoint: 480, // Para pantallas pequeñas
-        options: {
-          chart: {
-            height: 200,
-          },
-          markers: {
-            size: 2,
-          },
-        },
-      },
-    ],
+    colors:[  
+      '#6a994e', '#14213d', '#bc4749', '#fca311', '#a8dadc', '#457b9d', '#1d3557',]
   };
 
   return (
-    <div ref={chartRef} style={{ width: '100%' }}>
-      <Chart options={options} series={series} type="line" height={chartDimensions.height} width="100%" />
+    <div ref={chartRef} className={styles.container}>
+      <Paper elevation={1} sx={{ width: '100%', height: '100%', padding: '10px' }}>
+        <h3>{title}</h3>
+        <Chart options={options} series={series} type="line" width="100%" height="400px" /> 
+      </Paper>
     </div>
   );
 }

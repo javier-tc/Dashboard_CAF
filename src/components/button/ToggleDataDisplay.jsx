@@ -5,6 +5,9 @@ import LegendToggleIcon from '@mui/icons-material/LegendToggle';
 import ViewComfyIcon from '@mui/icons-material/ViewComfy'; // Icono para ambos
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Paper from '@mui/material/Paper';
+
+import Theme from '@/utils/themeProvider';
 
 export default function ToggleDataDisplay({ onChartClick, onTableClick, onBothClick }) {
   const [view, setView] = React.useState(() => ['table']); // Valor inicial: 'chart'
@@ -25,38 +28,25 @@ export default function ToggleDataDisplay({ onChartClick, onTableClick, onBothCl
   };
 
   return (
-    <ToggleButtonGroup
-      value={view}
-      onChange={handleViewChange}
-      aria-label="view toggle"
-      exclusive // Solo permite una opción activa a la vez
-      sx={{
-        '& .MuiToggleButtonGroup-grouped': {
-          color: 'var(--tertiary)',
-          '&.Mui-selected': {
-            color: 'var(--background-contrast)',
-            backgroundColor: 'var(--primary)',
-            '&:hover': {
-              color: 'var(--background-contrast)',
-              backgroundColor: 'var(--secondary)',
-            },
-          },
-          '&:hover': {
-            color: 'var(--background-contrast)',
-            backgroundColor: 'var(--secondary)',
-          },
-        }
-      }}
-    >
-      <ToggleButton value="table" aria-label="table view">
-        <TableChartIcon />
-      </ToggleButton>
-      <ToggleButton value="chart" aria-label="chart view">
-        <ShowChartIcon />
-      </ToggleButton>
-      <ToggleButton value="both" aria-label="both views">
-        <LegendToggleIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
+    <Theme>
+    <Paper elevation={1}>
+      <ToggleButtonGroup
+        value={view}
+        onChange={handleViewChange}
+        aria-label="view toggle"
+        exclusive // Solo permite una opción activa a la vez
+      >
+        <ToggleButton value="table" aria-label="table view">
+          <TableChartIcon />
+        </ToggleButton>
+        <ToggleButton value="chart" aria-label="chart view">
+          <ShowChartIcon />
+        </ToggleButton>
+        <ToggleButton value="both" aria-label="both views">
+          <LegendToggleIcon />
+        </ToggleButton>
+      </ToggleButtonGroup>
+      </Paper>
+    </Theme>
   );
 }
