@@ -10,14 +10,18 @@ import BasicSelect from '@/components/select/BasicSelect';
 import MultipleSelectCheckmarks from '@/components/select/MultipleSelectCheckmarks';
 import ToggleDataDisplay from '@/components/button/ToggleDataDisplay'; // El componente toggle para alternar entre gráficos y tablas
 import BasicTable from '@/components/table/BasicTable';
+import CustomSnackbar from '@/components/snackbar/Snackbar';
 
 //icon
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { SnackbarProvider } from 'notistack';
 
 // Importar el componente dinámicamente solo en el cliente
 const BasicLineChart = dynamic(() => import('@/components/charts/BasicLineChart'), { ssr: false });
 
 const Dashboard = () => {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState({ text: "", severity: "" });
   // Basic select (Comparación de años)
   const [selectedYear, setSelectedYear] = useState("2020");
 
@@ -159,36 +163,6 @@ const Dashboard = () => {
     { area: 300, water_consumption_lugar1: 80, water_consumption_lugar2: 56 },
   ];
 
-  // Estado para gráficos y tablas
-  const [activeGraphs, setActiveGraphs] = useState(false);
-  const [activeTables, setActiveTables] = useState(true);
-
-
-  const [graphDisplayStyle, setGraphDisplayStyle] = useState(styles.maxwidthGraphContainer);
-  const [tableDisplayStyle, setTableDisplayStyle] = useState(styles.maxwidthGraphContainer);
-
-  // const handleChartClick = () => {
-  //   setGraphDisplayStyle(styles.maxwidthGraphContainer);
-  //   setTableDisplayStyle(styles.maxwidthGraphContainer);
-  //   setActiveGraphs(true);
-  //   setActiveTables(false);
-  // };
-
-  // const handleTableClick = () => {
-  //   setGraphDisplayStyle(styles.maxwidthGraphContainer);
-  //   setTableDisplayStyle(styles.maxwidthGraphContainer);
-  //   setActiveTables(true);
-  //   setActiveGraphs(false);
-  // };
-
-  // const handleBothClick = () => {
-  //   setGraphDisplayStyle(styles.halfwidthGraphContainer);
-  //   setTableDisplayStyle(styles.halfwidthTableContainer);
-  //   setActiveGraphs(true);
-  //   setActiveTables(true);
-
-  // };
-
   //tabla
   const columns = [
     // { id: '', label: '', minWidth: 80 },
@@ -238,33 +212,51 @@ const Dashboard = () => {
 
   const handleChartClick = () => {
     setDataDisplayMode('charts');
-    setGraphDisplayStyle(styles.maxwidthGraphContainer);
-    setTableDisplayStyle(styles.maxwidthGraphContainer);
+    setSnackbarMessage({ text: "Se ha activado la vista de gráficos.", severity: "info" });
+    setSnackbarOpen(true);
   };
 
   const handleTableClick = () => {
     setDataDisplayMode('tables');
-    setGraphDisplayStyle(styles.maxwidthGraphContainer);
-    setTableDisplayStyle(styles.maxwidthGraphContainer);
+    setSnackbarMessage({ text: "Se ha activado la vista de tablas.", severity: "info" });
+    setSnackbarOpen(true);
   };
 
   const handleBothClick = () => {
     setDataDisplayMode('both');
-    setGraphDisplayStyle(styles.halfwidthGraphContainer);
-    setTableDisplayStyle(styles.halfwidthTableContainer);
+    setSnackbarMessage({ text: "Se ha activado la vista combinada.", severity: "info" });
+    setSnackbarOpen(true);
   };
 
+  // Función para agregar componentes
   const handleAddComponent = () => {
     const newId = Math.max(...dataComponents.map(comp => comp.id), 0) + 1;
     setDataComponents([...dataComponents, { id: newId }]);
+    setSnackbarMessage({
+      text: "Se ha agregado una consulta.",
+      severity: "success"
+    });
+    setSnackbarOpen(true);
   };
 
   const handleRemoveComponent = (id) => {
     setDataComponents(dataComponents.filter(comp => comp.id !== id));
+    setSnackbarMessage({
+      text: "Se ha eliminado una consulta.",
+      severity: "error",
+    });
+    setSnackbarOpen(true);
   };
 
 
   return (
+    <SnackbarProvider
+      maxSnack={2}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+      }}
+      >
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <h2> Dashboard </h2>
@@ -348,11 +340,10 @@ const Dashboard = () => {
           />
         </div>
       </div>
-
       <div className={styles.resultsContainer}>
         {dataComponents.map((component) => (
-          <Maincard>
-            <div key={component.id} className={styles.dataContainer}>
+          <Maincard key={component.id}>
+            <div className={styles.dataContainer}>
               <button
                 onClick={() => handleRemoveComponent(component.id)}
                 className={styles.removeComponentButton}
@@ -386,8 +377,14 @@ const Dashboard = () => {
           </Maincard>
         ))}
       </div>
-
+      <CustomSnackbar
+          open={snackbarOpen}
+          message={snackbarMessage.text}
+          severity={snackbarMessage.severity}
+          onClose={() => setSnackbarOpen(false)}
+        />
     </div>
+    </SnackbarProvider>
   );
 };
 
