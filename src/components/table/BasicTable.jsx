@@ -26,7 +26,7 @@ export default function BasicTable({ columns, data, columnGroups }) {
     return (
         <Theme>
             <Paper sx={{ width: '100%' }} elevation={1}>
-                <TableContainer sx={{ maxHeight: 640, minHeight: 340, height: '100%' }}>
+                <TableContainer sx={{ maxHeight: 650, minHeight: 340, height: '100%' }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead >
                             {/* Renderiza las agrupaciones de columnas si están definidas */}
