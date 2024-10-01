@@ -1,6 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 10px;
     padding: 10px;
 }
@@ -8,11 +9,10 @@
 .titleContainer {
     display: flex;
     flex-direction: column;
-    gap: 11px;
 }
 
 .titleContainer h2 {
-    padding: 10px;
+    padding: 6px;
 }
 
 .fetchDataContainer {
@@ -30,7 +30,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     align-content: flex-start;
-    gap: 30px;
+    gap: 20px;
     padding: 10px;
 }
 
@@ -47,7 +47,7 @@
     justify-content: flex-start;
     max-width: 370px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
 }
 
 .addComponentContainer {
@@ -73,12 +73,45 @@
 
 .resultsContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-wrap: wrap;
     gap: 10px;
-    /* margin-top: 20px; */
-}
+    justify-content: space-between;
+  }
+  
+  .resultItem {
+    flex-grow: 0;
+    flex-shrink: 0;
+    transition: all 0.3s ease
+  }
+  
+  .fullWidth {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+  
+  .halfWidth {
+    flex-basis: calc(50% - 5px);
+    max-width: calc(50% - 5px);
+  }
+  
+  /* .rowStart {
+    margin-right: auto;
+  } */
+  
+  /* .rowEnd {
+    margin-left: auto;
+  } */
+  
+  @media (max-width: 1200px) {
+    .resultItem {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+  }
+  
+  /* Resto de tus estilos... */
+
+
 
 .toggleContainer {
     display: flex;
@@ -94,44 +127,37 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: flex-start;
-    /* gap: 10px; */
+    gap: 5px;
     overflow-x: auto;
     overflow-y: hidden;
     padding: 10px;
 }
 
 .maxwidthGraphContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     min-width: 350px;
     width: 100%;
     max-width: 1600px;
     padding: 5px;
-    /* overflow-x: auto; */
 }
 
 .halfwidthTableContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     min-width: 350px;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     padding: 5px;
 }
 
 .halfwidthGraphContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     min-width: 350px;
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     padding: 5px;
+}
+
+.removeButtonContainer {
+    display: flex;
+    justify-content: right;
+    width: 100%;
 }
 
 .removeComponentButton {
@@ -148,7 +174,5 @@
 }
 
 .removeComponentButton:hover {
-    /* border-radius: 90px; */
-    /* background-color: red; */
     color: red;
 }

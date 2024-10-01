@@ -4,10 +4,10 @@ import Chart from 'react-apexcharts';
 
 import styles from './basiclinechart.module.css';
 
-export default function BasicLineChart({ title, xAxis_data, yAxis_data, dataset, yAxis_title }) {
+export default function BasicLineChart({ title, xAxisData, yAxisData, dataset, yAxisTitle }) {
   const chartRef = useRef(null);
 
-  const series = yAxis_data.map((yData) => ({
+  const series = yAxisData.map((yData) => ({
     name: yData.label,
     data: dataset.map((data) => data[yData.dataKey]),
   }));
@@ -20,17 +20,17 @@ export default function BasicLineChart({ title, xAxis_data, yAxis_data, dataset,
       },
     },
     xaxis: {
-      categories: dataset.map((data) => data[xAxis_data.dataKey]),
+      categories: dataset.map((data) => data[xAxisData.dataKey]),
       labels: {
-        formatter: xAxis_data.valueFormatter || ((value) => value),
+        formatter: xAxisData.valueFormatter || ((value) => value),
       },
       title: {
-        text: xAxis_data.label || 'X Axis',
+        text: xAxisData.label || 'X Axis',
       },
     },
     yaxis: {
       title: {
-        text: yAxis_title || 'Y Axis',
+        text: yAxisTitle || 'Y Axis',
       },
     },
     stroke: {},

@@ -1,9 +1,40 @@
 .container {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--background-contrast);
-    height: 50px;
-    margin-left: 150px;
+    height: 60px;
+    padding: 20px 20px;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+}
+
+.menuButton {
+    color: var(--secondary);
+    background-color: var(--primary-highlight);
+    padding: 4px;
+    border: 0px solid var(--secondary);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.menuButton:hover {
+    background-color: var(--primary);
+    color: var(--background-contrast);
+}
+
+@media (max-width: 600px) {
+    .logoContainer a{
+        display: none;
+    }
 }

@@ -5,6 +5,7 @@
   --foreground: #171717;
   
   --primary: #6a994e;
+  --primary-highlight: #6a994e42;
   --secondary: #386641;
   --tertiary: #14213d;
   --contrast: #bc4749;
@@ -59,18 +60,20 @@ a {
   border: 3px solid var(--background-contrast); /* Espacio entre la barra y el contenedor */
 }
 
+.layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Para que ocupe toda la altura */
+}
+
 .container {
-  margin-left: 150px;
+  margin-top: 60px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
-  }
-}
-
-@media (max-width: 600px) {
-  .container {
-    margin-left: 60px;
   }
 }

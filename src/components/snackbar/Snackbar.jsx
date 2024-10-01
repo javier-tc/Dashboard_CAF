@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSnackbar } from 'notistack';
 import ThemedAlert from '@/components/alert/ThemedAlert';
 
-// Componente reutilizable que se integra con notistack
-export default function CustomSnackbar({ message, severity }) {
+export default function CustomSnackbar({ message, severity, id }) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const shownMessagesRef = useRef(new Set());
 
-  React.useEffect(() => {
-    // Encolar el Snackbar cuando se recibe el mensaje
-    if (message) {
+  useEffect(() => {
+    if (message && !shownMessagesRef.current.has(id)) {
       enqueueSnackbar(message, {
+        variant: severity,
+        persist: false,
+        key: id,
         content: (key) => (
           <ThemedAlert
             severity={severity}
@@ -21,8 +23,9 @@ export default function CustomSnackbar({ message, severity }) {
           </ThemedAlert>
         ),
       });
+      shownMessagesRef.current.add(id);
     }
-  }, [message, severity, enqueueSnackbar, closeSnackbar]);
+  }, [message, severity, id, enqueueSnackbar, closeSnackbar]);
 
-  return null; // Este componente no necesita renderizar nada directamente
+  return null;
 }

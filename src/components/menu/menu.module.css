@@ -1,23 +1,43 @@
 /* Estilo base para el contenedor */
-.container {
-    position: fixed;
-    top: 0;
-    left: 0;
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.menuContainer {
     height: 100vh;
-    width: 100%;
-    max-width: 150px;
     background-color: var(--background-contrast);
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: width 0.3s ease;
     color: var(--foreground);
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 10px 14px;
+}
+
+.show {
+    width: 180px;
+}
+
+.hide {
+    width: 60px;
+}
+
+.hide .linkText {
+    display: none;
+}
+
+.hide .logoContainer {
+    font-size: 16px;
+}
+
+.hide .link {
+    justify-content: center;
 }
 
 /* Logo */
 .logoContainer {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
@@ -39,6 +59,7 @@
     align-items: center;
     gap: 5px;
     padding: 4px;
+    border-radius: 4px;
     text-decoration: none;
     color: var(--foreground);
     font-weight: 500;
@@ -47,14 +68,16 @@
 
 /* Al hacer hover sobre el link */
 .link:hover {
-    color: var(--primary);
+    color: var(--secondary);
+    background-color: var(--primary-highlight);
     cursor: pointer;
 }
 
 /* Estilo para la página activa */
 .active {
-    color: var(--primary);
+    color: var(--secondary);
     font-weight: bold;
+    background-color: var(--primary-highlight);
 }
 
 /* Texto del link */
@@ -64,20 +87,54 @@
 
 /* Media query para pantallas pequeñas */
 @media (max-width: 600px) {
-    .container {
-        max-width: 60px; /* Reducir el tamaño del contenedor */
-        padding: 10px;
+    .menuContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        background-color: var(--background-contrast);
+        width: 200px;
+        padding: 20px;
+        /* Para que quede encima del contenido */
+        z-index: 1000;
+
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        transition: transform 0.3s ease;
+
+        /* Oculto por defecto */
+        transform: translateX(-100%);
+        
     }
 
-    .linkText {
-        display: none; /* Ocultar el texto de los links */
+    .show {
+        transform: translateX(0);
+        /* Mostrar el menú */
+    }
+
+    .hide {
+        transform: translateX(-100%);
+        /* Ocultar el menú */
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Sombra oscura */
+        z-index: 900;
+        /* Detrás del menú */
+    }
+
+    .showOverlay {
+        display: block;
+        /* Mostrar sombra */
     }
 
     .logoContainer {
-        font-size: 16px; /* Reducir el tamaño del logo */
-    }
-
-    .link {
-        justify-content: center; /* Centrar los íconos en el contenedor */
+        display: flex;
     }
 }
