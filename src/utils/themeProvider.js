@@ -76,11 +76,11 @@ const theme = createTheme({
         MuiTableCell: {
             styleOverrides: {
                 root: {
-                    borderBottom: '1px solid #386641', // Borde inferior de las celdas
+                    borderBottom: '1px solid #14213d', // Borde inferior de las celdas
                     color: '#14213d', // Color del texto
                 },
                 head: {
-                    backgroundColor: '#6a994e', // Color de fondo para las celdas del encabezado
+                    backgroundColor: '#386641', // Color de fondo para las celdas del encabezado
                     color: '#ffffff', // Color del texto del encabezado
                 },
             },

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useSnackbar } from 'notistack';
 import ThemedAlert from '@/components/alert/ThemedAlert';
 
-export default function CustomSnackbar({ message, severity, id }) {
+export default function CustomSnackbar({ message = "", severity = "success", id = null }) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const shownMessagesRef = useRef(new Set());
 

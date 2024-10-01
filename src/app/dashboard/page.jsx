@@ -16,10 +16,12 @@ import ToggleDataDisplay from '@/components/button/ToggleDataDisplay'; // El com
 import BasicTable from '@/components/table/BasicTable';
 import CustomSnackbar from '@/components/snackbar/Snackbar';
 import ThemedAlert from '@/components/alert/ThemedAlert';
+import LoadingButtons from '@/components/button/LoadingButton';
 
 //icon
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { SnackbarProvider } from 'notistack';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 // Importar el componente dinámicamente solo en el cliente
 const BasicLineChart = dynamic(() => import('@/components/charts/BasicLineChart'), { ssr: false });
@@ -95,6 +97,7 @@ const Dashboard = () => {
   // Manejo de componentes de consultas
   const handleAddComponent = async () => {
     setLoading(true);
+    
     try {
       const response = await api.get('/api/data');
       const data = response.data;
@@ -111,17 +114,28 @@ const Dashboard = () => {
       };
 
       setDataComponents(prevComponents => [...prevComponents, newComponent]);
-      showSnackbar("Se ha agregado una consulta.", "success");
+      showSnackbar(`Se ha agregado la consulta con ID ${newComponent.id}.`, "success");
     } catch (err) {
       showSnackbar(err.message, "error");
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
+  useEffect(() => {
+    if (!loading) {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  }, [dataComponents, loading]);
+
   const handleRemoveComponent = (id) => {
     setDataComponents(dataComponents.filter(comp => comp.id !== id));
-    showSnackbar("Se ha eliminado una consulta.", "error");
+    showSnackbar(`Se ha eliminado la consulta con ID ${id}.`, "error");
   };
 
   // if (loading) return <p>Cargando datos...</p>;
@@ -200,9 +214,12 @@ const Dashboard = () => {
               </div>
             </div>
             <div className={styles.addComponentContainer}>
-              <button onClick={handleAddComponent} className={styles.addComponentButton}>
-                Realizar consulta
-              </button>
+              <LoadingButtons
+                loading={loading}
+                onClick={handleAddComponent}
+                text="Agregar consulta"
+                icon={<QueryStatsIcon />}
+              />
             </div>
           </div>
         </Maincard>
@@ -221,11 +238,11 @@ const Dashboard = () => {
           {dataComponents.map((component, index) => (
             <div
               key={component.id}
-              className={`${styles.resultItem} ${dataComponents.length === 1 ? styles.fullWidth : styles.halfWidth
-                }`}
+              className={`${styles.resultItem} ${dataComponents.length === 1 ? styles.fullWidth : styles.halfWidth}`}
             >
               <Maincard>
                 <div className={styles.dataContainer}>
+                  <h4>{"placeholder title id " + component.id}</h4>
                   <div className={styles.removeButtonContainer}>
                     <button
                       onClick={() => handleRemoveComponent(component.id)}
@@ -234,7 +251,6 @@ const Dashboard = () => {
                       <HighlightOffIcon />
                     </button>
                   </div>
-                  <h4>{"placeholder title id " + component.id}</h4>
                   {(dataDisplayMode === 'tables' || dataDisplayMode === 'both') &&
                     component.dataTable.length > 0 && (
                       <div

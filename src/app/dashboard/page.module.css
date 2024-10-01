@@ -54,23 +54,6 @@
     padding: 10px;
 }
 
-.addComponentButton {
-    width: auto;
-    padding: 10px;
-    border-radius: 5px;
-    border: 0px solid var(--primary);
-    background-color: var(--primary); /* #6a994e */
-    color: var(--background-contrast);
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.addComponentButton:hover {
-    transition: all 0.3s ease-in-out;
-    box-shadow: inset 4.95px 4.95px 5.6px rgba(0, 0, 0, 0.1);
-    background-color: var(--secondary);
-}
-
 .resultsContainer {
     display: flex;
     flex-wrap: wrap;
@@ -136,22 +119,22 @@
 .maxwidthGraphContainer {
     min-width: 350px;
     width: 100%;
-    max-width: 1600px;
-    padding: 5px;
+    max-width: 1465px;
+    /* padding: 5px; */
 }
 
 .halfwidthTableContainer {
     min-width: 350px;
     width: 100%;
-    max-width: 900px;
-    padding: 5px;
+    max-width: 730px;
+    /* padding: 5px; */
 }
 
 .halfwidthGraphContainer {
     min-width: 350px;
     width: 100%;
-    max-width: 700px;
-    padding: 5px;
+    max-width: 730px;
+    /* padding: 5px; */
 }
 
 .removeButtonContainer {
@@ -174,5 +157,5 @@
 }
 
 .removeComponentButton:hover {
-    color: red;
+    color: var(--contrast);
 }

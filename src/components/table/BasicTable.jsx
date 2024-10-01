@@ -37,11 +37,11 @@ export default function BasicTable({ columns, data, columnGroups }) {
                                             key={index}
                                             align={group.align || 'center'}
                                             colSpan={group.colSpan}
-                                            // sx={{
-                                            //     backgroundColor: 'var(--background)',
-                                            //     borderBottom: '1px solid var(--background-contrast)',
-                                            //     fontWeight: 'bold',
-                                            // }}
+                                        // sx={{
+                                        //     backgroundColor: 'var(--background)',
+                                        //     borderBottom: '1px solid var(--background-contrast)',
+                                        //     fontWeight: 'bold',
+                                        // }}
                                         >
                                             {group.label}
                                         </TableCell>
@@ -55,10 +55,10 @@ export default function BasicTable({ columns, data, columnGroups }) {
                                         key={column.id}
                                         align={column.align || 'left'}
                                         style={{ top: columnGroups ? 57 : 0, minWidth: column.minWidth }}
-                                        // sx={{
-                                        //     backgroundColor: 'var(--background)',
-                                        //     fontWeight: 'bold',
-                                        // }}
+                                    // sx={{
+                                    //     backgroundColor: 'var(--background)',
+                                    //     fontWeight: 'bold',
+                                    // }}
                                     >
                                         {column.label}
                                     </TableCell>
