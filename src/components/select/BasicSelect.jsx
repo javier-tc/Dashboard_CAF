@@ -7,40 +7,44 @@ import Select from '@mui/material/Select';
 
 import Theme from '@/utils/themeProvider';
 
+import styles from './basicselect.module.css';
+
 export default function BasicSelect({ label, options, value, onChange }) {
   return (
     <Theme>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl
-          fullWidth
-        >
-          <InputLabel
-            id="basic-select-label"
-            sx={{
-              display: 'block',
-              textOverflow: 'ellipsis',
-            }}
+      <div className={styles.selectContainer}>
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl
+            fullWidth
           >
-            {label}
-          </InputLabel>
-          <Select
-            labelId="basic-select-label"
-            id="basic-select"
-            value={value}
-            label={label}
-            onChange={onChange}
-            sx={{
-              minWidth: '180px',
-            }}
-          >
-            {options.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
+            <InputLabel
+              id="basic-select-label"
+              sx={{
+                display: 'block',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {label}
+            </InputLabel>
+            <Select
+              labelId="basic-select-label"
+              id="basic-select"
+              value={value}
+              label={label}
+              onChange={onChange}
+              sx={{
+                minWidth: '180px',
+              }}
+            >
+              {options.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+      </div>
     </Theme>
   );
 }

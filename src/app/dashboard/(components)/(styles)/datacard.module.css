@@ -1,0 +1,84 @@
+.resultsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.resultItem {
+    flex-grow: 0;
+    flex-shrink: 0;
+    transition: all 0.3s ease
+}
+
+.fullWidth {
+    flex-basis: 100%;
+    max-width: 100%;
+}
+
+.halfWidth {
+    flex-basis: calc(50% - 5px);
+    max-width: calc(50% - 5px);
+}
+
+@media (max-width: 1200px) {
+    .resultItem {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
+.dataContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 5px;
+    align-items: flex-start;
+    align-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px;
+}
+
+.maxwidthGraphContainer {
+    min-width: 350px;
+    width: 100%;
+    max-width: 1465px;
+}
+
+.halfwidthTableContainer {
+    min-width: 350px;
+    width: 100%;
+    max-width: 730px;
+}
+
+.halfwidthGraphContainer {
+    min-width: 350px;
+    width: 100%;
+    max-width: 730px;
+}
+
+.removeButtonContainer {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+.removeComponentButton {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    color: var(--tertiary);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.removeComponentButton:hover {
+    color: var(--contrast);
+}

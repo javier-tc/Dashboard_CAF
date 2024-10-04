@@ -1,0 +1,6 @@
+.selectContainer {
+    min-width: 180px;
+    max-width: 310px;
+    display: flex;
+    flex-direction: column;
+}

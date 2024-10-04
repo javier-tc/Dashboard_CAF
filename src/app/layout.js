@@ -10,6 +10,7 @@ export const metadata = {
   description: "",
 };
 import { Inter } from "next/font/google";
+import TitleCard from "@/components/card/TitleCard";
 
 
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       <div className="layout">
           <Menu />
           <div className="container">
+            <TitleCard />
             {children}
           </div>
         </div>
