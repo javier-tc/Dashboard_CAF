@@ -23,7 +23,7 @@
     justify-content: flex-start;
     max-width: 370px;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 9px;
 }
 
 .addComponentContainer {

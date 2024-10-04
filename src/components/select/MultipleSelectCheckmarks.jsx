@@ -52,7 +52,7 @@ export default function MultipleSelectCheckmarks({ label, options, selectedValue
             onChange={handleChange}
             input={<OutlinedInput label={label} />}
             renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, padding: '10px 0px 10px 0px'}}>
                 {selected.map((value) => (
                   <Chip key={value} label={value} />
                 ))}

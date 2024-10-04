@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './(styles)/fetchdatacard.module.css';
+import api from '@/config/axiosConfig'; // Importa la configuración de Axios
 
 // Components
 import BasicSelect from '@/components/select/BasicSelect';
@@ -33,25 +34,30 @@ const FetchDataCard = ({handleAddQuery, loading}) => {
 
     useEffect(() => {
         const fetchSelectors = async () => {
-            try {
-                setLoadingSelectors(true);
-                const response = await api.get('/api/selectors'); // Usando axios en lugar de fetch
-                const data = response.data;
-
-                setYears(data.years);
-                setFundos(data.fundos);
-                setPredios(data.predios);
-                setSectores(data.sectores);
-                setAtributos1(data.atributos1);
-                setAtributos2(data.atributos2);
-            } catch (err) {
-                setError('Error al obtener datos del servidor');
-            } finally {
-                setLoadingSelectors(false);
-            }
+          try {
+            setLoadingSelectors(true);
+            // console.log("Fetching selectors...");
+            const response = await api.get('/api/selectors');
+            const data = response.data;
+            // console.log("Data fetched:", data);
+            
+            setYears(data.years);
+            setFundos(data.fundos);
+            setPredios(data.predios);
+            setSectores(data.sectores);
+            setAtributos1(data.atributos1);
+            setAtributos2(data.atributos2);
+          } catch (err) {
+            console.error('Error:', err.message);
+            setError('Error al obtener datos del servidor');
+          } finally {
+            setLoadingSelectors(false);
+          }
         };
+      
         fetchSelectors();
-    }, []);
+      }, []);
+      
 
     useEffect(() => {
         setLoadingData(loading);
