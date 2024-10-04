@@ -50,7 +50,7 @@ const Dashboard = () => {
   const [atributo2, setAtributo2] = useState("");
 
   // Manejo de la visualización de gráficos y tablas
-  const [dataDisplayMode, setDataDisplayMode] = useState('tables');
+  const [dataDisplayMode, setDataDisplayMode] = useState('table');
   const [dataComponents, setDataComponents] = useState([]);
 
   // Estado de carga y errores
@@ -88,11 +88,11 @@ const Dashboard = () => {
   const handleChangeAtributo1 = (event) => setAtributo1(event.target.value);
   const handleChangeAtributo2 = (event) => setAtributo2(event.target.value);
 
-  // Manejo de gráficos y tablas
-  const handleChartClick = () => setDataDisplayMode('charts');
-  const handleTableClick = () => setDataDisplayMode('tables');
-  const handleBothClick = () => setDataDisplayMode('both');
-
+  const handleViewChange = (event, newView) => {
+    if (newView) {
+      setDataDisplayMode(newView);
+    }
+  };
 
   // Manejo de componentes de consultas
   const handleAddComponent = async () => {
@@ -138,9 +138,6 @@ const Dashboard = () => {
     showSnackbar(`Se ha eliminado la consulta con ID ${id}.`, "error");
   };
 
-  // if (loading) return <p>Cargando datos...</p>;
-  // if (error) return <p>{error}</p>;
-
   return (
     <SnackbarProvider
       maxSnack={2}
@@ -151,11 +148,13 @@ const Dashboard = () => {
       preventDuplicate={false}
     >
       <div className={styles.container}>
+
         <div className={styles.titleContainer}>
           <Maincard>
             <h2> Dashboard </h2>
           </Maincard>
         </div>
+
         <Maincard>
           <div className={styles.fetchDataContainer}>
             <div className={styles.selectGroupContainer}>
@@ -223,17 +222,18 @@ const Dashboard = () => {
             </div>
           </div>
         </Maincard>
+
         <div className={styles.toggleContainer}>
           {dataComponents.length === 0 ? (
             <ThemedAlert severity="info">Debe realizar una consulta para mostrar información.</ThemedAlert>
           ) : (
             <ToggleDataDisplay
-              onChartClick={handleChartClick}
-              onTableClick={handleTableClick}
-              onBothClick={handleBothClick}
+              view={dataDisplayMode} // Pasar el modo actual de visualización
+              onViewChange={handleViewChange} // Manejar el cambio de visualización
             />
           )}
         </div>
+
         <div className={styles.resultsContainer}>
           {dataComponents.map((component, index) => (
             <div
@@ -251,7 +251,7 @@ const Dashboard = () => {
                       <HighlightOffIcon />
                     </button>
                   </div>
-                  {(dataDisplayMode === 'tables' || dataDisplayMode === 'both') &&
+                  {(dataDisplayMode === 'table' || dataDisplayMode === 'both') &&
                     component.dataTable.length > 0 && (
                       <div
                         className={
@@ -268,7 +268,7 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                  {(dataDisplayMode === 'charts' || dataDisplayMode === 'both') &&
+                  {(dataDisplayMode === 'chart' || dataDisplayMode === 'both') &&
                     component.dataset.length > 0 && (
                       <div
                         className={
@@ -299,6 +299,7 @@ const Dashboard = () => {
             id={snackbar.id}
           />
         )}
+        
       </div>
     </SnackbarProvider>
   );

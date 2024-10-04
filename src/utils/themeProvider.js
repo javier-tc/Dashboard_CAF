@@ -32,29 +32,29 @@ const theme = createTheme({
                     color: '#14213d', // Tertiary color for default state
                     '&.Mui-selected': {
                         color: '#fff', // Text color when selected
-                        backgroundColor: '#6a994e', // Primary color when selected
+                        backgroundColor: '#386641', // Primary color when selected
                         '&:hover': {
                             backgroundColor: '#386641', // Secondary color on hover
                         },
                     },
                     '&:hover': {
                         color: '#fff', // Text color on hover
-                        backgroundColor: '#386641', // Warning color on hover when not selected
+                        backgroundColor: '#6a994e', // Warning color on hover when not selected
                     },
                 },
             },
         },
-        MuiToggleButtonGroup: {
-            styleOverrides: {
-                root: {
-                    borderColor: '#6a994e', // Primary color for the border
-                    '& .Mui-selected': {
-                        color: '#6a994e', // Color for selected item
-                        borderColor: '#6a994e', // Border color for selected item
-                    },
-                },
-            },
-        },
+        // MuiToggleButtonGroup: {
+        //     styleOverrides: {
+        //         root: {
+        //             borderColor: '#386641', // Primary color for the border
+        //             '& .Mui-selected': {
+        //                 color: '#6a994e', // Color for selected item
+        //                 borderColor: '#6a994e', // Border color for selected item
+        //             },
+        //         },
+        //     },
+        // },
         MuiTable: {
             styleOverrides: {
                 root: {
