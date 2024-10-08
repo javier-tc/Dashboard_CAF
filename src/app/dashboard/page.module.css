@@ -5,10 +5,51 @@
     gap: 10px;
 }
 
-.toggleContainer {
+.buttonContainer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start; /* Espacia los elementos al inicio y centro */
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.alert {
     display: flex;
     width: 100%;
     justify-content: center;
-    align-items: center;
 }
 
+.selectButtonContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    min-width: max-content;
+    width: calc(50% - 69px); /* 50% de la anchura del contenedor - 69px (anchura del botón + padding contenedor) */
+    gap: 5px;
+}
+
+.dataDisplayModeContainer {
+    display: flex;
+    justify-content: flex-start; /* Centra el elemento */
+}
+
+@media (max-width: 400px) {
+    .selectButtonContainer {
+        width: 100%;
+        justify-content: center;
+    }
+    .dataDisplayModeContainer {
+        position: fixed;
+        top:0;
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+.buttonText {
+    display: flex;
+    align-items: center;
+}

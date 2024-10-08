@@ -18,13 +18,13 @@ export default function ToggleDataDisplay({ view, onViewChange }) {
           aria-label="view toggle"
           exclusive // Solo permite una opción activa a la vez
         >
-          <ToggleButton value="table" aria-label="table view">
+          <ToggleButton value="table" aria-label="table view" title='Mostrar tablas'>
             <TableChartIcon />
           </ToggleButton>
-          <ToggleButton value="chart" aria-label="chart view">
+          <ToggleButton value="chart" aria-label="chart view" title='Mostrar gráficos'>
             <ShowChartIcon />
           </ToggleButton>
-          <ToggleButton value="both" aria-label="both views">
+          <ToggleButton value="both" aria-label="both views" title='Mostrar tablas y gráficos'>
             <LegendToggleIcon />
           </ToggleButton>
         </ToggleButtonGroup>

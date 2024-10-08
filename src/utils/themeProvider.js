@@ -19,22 +19,38 @@ const theme = createTheme({
             main: '#f4a261',
         },
         info: {
-            main: '#2a9d8f',
+            main: '#315196',
         },
         success: {
             main: '#6a994e',
         },
     },
     components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    height: '40px',
+                    color: '#fff',
+                    transition: 'all 0.3s ease',
+                    // backgroundColor: '#386641ea',
+                    // '&:hover': {
+                    //     color: '#fff', // Text color on hover
+                    //     backgroundColor: '#38664a', // Warning color on hover when not selected
+                    // },
+                },
+            },
+        },
         MuiToggleButton: {
             styleOverrides: {
                 root: {
                     color: '#14213d', // Tertiary color for default state
+                    height: '40px',
+                    width: '40px',
                     '&.Mui-selected': {
                         color: '#fff', // Text color when selected
-                        backgroundColor: '#386641', // Primary color when selected
+                        backgroundColor: '#6a994e', // Primary color when selected
                         '&:hover': {
-                            backgroundColor: '#386641', // Secondary color on hover
+                            backgroundColor: '#4f723a', // Secondary color on hover
                         },
                     },
                     '&:hover': {

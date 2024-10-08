@@ -1,7 +1,6 @@
-//src/app/dashboard/page.jsx
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import styles from './page.module.css';
 import api from '@/config/axiosConfig'; // Importa la configuración de Axios
 
@@ -12,21 +11,20 @@ import ThemedAlert from '@/components/alert/ThemedAlert';
 import DataCard from './(components)/DataCard';
 import FetchDataCard from './(components)/FetchDataCard';
 
-
 // Notistack
 import { SnackbarProvider } from 'notistack';
+import DefaultButton from '@/components/button/DefaultButton';
 
-// Dnd-kit
-// import {
-//   arrayMove,
-// } from '@dnd-kit/sortable';
+//icons
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 const Dashboard = () => {
   const [snackbar, setSnackbar] = useState({ message: "", severity: "", id: null });
   const [dataDisplayMode, setDataDisplayMode] = useState('table');
   const [dataComponents, setDataComponents] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [selectedComponents, setSelectedComponents] = useState([]);
 
   const showSnackbar = (message, severity) => {
     setSnackbar({ message, severity, id: Date.now() });
@@ -46,7 +44,7 @@ const Dashboard = () => {
       const data = response.data;
 
       const newComponent = {
-        id: `component-${Date.now()}`, // Generar un ID único con timestamp
+        id: `component-${Date.now()}`,
         dataset: data.dataset,
         xAxisData: data.xAxisData,
         yAxisData: data.yAxisData,
@@ -70,43 +68,79 @@ const Dashboard = () => {
   const handleRemoveComponent = useCallback((id) => {
     setDataComponents(prevComponents => prevComponents.filter(comp => comp.id !== id));
     showSnackbar(`Se ha eliminado la consulta con ID ${id}.`, "error");
-  }, [showSnackbar])
+  }, [showSnackbar]);
 
-  // const handleDragEnd = useCallback((event) => {
-  //   const { active, over } = event;
+  // Manejar selección de componentes
+  const handleSelectComponent = (id) => {
+    setSelectedComponents((prevSelected) =>
+      prevSelected.includes(id) ? prevSelected.filter(compId => compId !== id) : [...prevSelected, id]
+    );
+    showSnackbar(`Se ha seleccionado la consulta con ID ${id}.`, "info");
+  };
 
-  //   if (active.id !== over.id) {
-  //     setDataComponents((items) => {
-  //       const oldIndex = items.findIndex((item) => item.id === active.id);
-  //       const newIndex = items.findIndex((item) => item.id === over.id);
+  // Manejar selección de todos los componentes
+  const handleSelectAllComponents = () => {
+    if (selectedComponents.length === dataComponents.length) {
+      setSelectedComponents([]); // Deseleccionar todos si ya están seleccionados
+      showSnackbar("Se han deseleccionado todas las consultas.", "info");
+    } else {
+      setSelectedComponents(dataComponents.map(comp => comp.id)); // Seleccionar todos
+      showSnackbar("Se han seleccionado todas las consultas.", "info");
+    }
+  };
 
-  //       return arrayMove(items, oldIndex, newIndex);
-  //     });
-  //   }
-  // }, []);
-
-
+  // Manejar eliminación de componentes seleccionados
+  const handleRemoveSelectedComponents = () => {
+    setDataComponents((prevComponents) => prevComponents.filter(comp => !selectedComponents.includes(comp.id)));
+    setSelectedComponents([]);
+    showSnackbar("Se han eliminado las consultas seleccionadas.", "error");
+  };
 
   return (
     <SnackbarProvider
       maxSnack={2}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
+        vertical: 'bottom',
+        horizontal: 'left',
       }}
       preventDuplicate={false}
+      autoHideDuration={2000}
     >
       <div className={styles.container}>
         <FetchDataCard handleAddQuery={handleAddQuery} loading={loading} />
 
-        <div className={styles.toggleContainer}>
+        <div className={styles.buttonContainer}>
           {dataComponents.length === 0 ? (
-            <ThemedAlert severity="info">Debe realizar una consulta para mostrar información.</ThemedAlert>
+            <div className={styles.alert}>
+              <ThemedAlert severity="info">Debe realizar una consulta para mostrar información.</ThemedAlert>
+            </div>
           ) : (
-            <ToggleDataDisplay
-              view={dataDisplayMode} // Pasar el modo actual de visualización
-              onViewChange={handleViewChange} // Manejar el cambio de visualización
-            />
+            <>
+              <div className={styles.selectButtonContainer}>
+                <DefaultButton
+                  onClick={handleSelectAllComponents}
+                  variant="contained"
+                >
+                  <div className={styles.buttonText}>
+                    {selectedComponents.length === dataComponents.length ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+                    {/* {selectedComponents.length === dataComponents.length ? "Deseleccionar todos" : "Seleccionar todos"} */}
+                  </div>
+                </DefaultButton>
+                <DefaultButton
+                  onClick={handleRemoveSelectedComponents}
+                  disabled={selectedComponents.length === 0}
+                  variant="contained"
+                >
+                  Eliminar seleccionados
+                </DefaultButton>
+              </div>
+              <div className={styles.dataDisplayModeContainer}>
+                <ToggleDataDisplay
+                  view={dataDisplayMode}
+                  onViewChange={handleViewChange}
+                />
+              </div>
+            </>
           )}
         </div>
 
@@ -114,7 +148,8 @@ const Dashboard = () => {
           dataComponents={dataComponents}
           dataDisplayMode={dataDisplayMode}
           handleRemoveComponent={handleRemoveComponent}
-          // handleDragEnd={handleDragEnd}
+          selectedComponents={selectedComponents}
+          handleSelectComponent={handleSelectComponent}
         />
 
         {snackbar.message && (
