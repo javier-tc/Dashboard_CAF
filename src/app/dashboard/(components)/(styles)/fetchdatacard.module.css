@@ -19,13 +19,14 @@
 
 .sectoresContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
-    max-width: 370px;
+    max-height: 122px;
     flex-wrap: wrap;
     gap: 9px;
 }
 
 .addComponentContainer {
-    padding: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
 }

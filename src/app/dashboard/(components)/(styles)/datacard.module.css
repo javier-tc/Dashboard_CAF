@@ -75,6 +75,23 @@
     color: var(--contrast);
 }
 
+.downloadComponentButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    padding: 12px;
+    background-color: transparent;
+    color: var(--tertiary);
+    border: none;
+}
+
+.downloadComponentButton:hover {
+    color: var(--primary);
+}
+
 .dataTitle {
     display: flex;
     width: 100%;

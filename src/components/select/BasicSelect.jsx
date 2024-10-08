@@ -33,7 +33,7 @@ export default function BasicSelect({ label, options, value, onChange }) {
               label={label}
               onChange={onChange}
               sx={{
-                minWidth: '180px',
+                minWidth: '200px',
               }}
             >
               {options.map((option) => (

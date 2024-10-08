@@ -27,7 +27,7 @@
     justify-content: flex-start;
     min-width: max-content;
     width: calc(50% - 69px); /* 50% de la anchura del contenedor - 69px (anchura del botón + padding contenedor) */
-    gap: 5px;
+    gap: 9px;
 }
 
 .dataDisplayModeContainer {

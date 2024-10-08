@@ -18,6 +18,8 @@ import DefaultButton from '@/components/button/DefaultButton';
 //icons
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import DownloadIcon from '@mui/icons-material/Download';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Dashboard = () => {
   const [snackbar, setSnackbar] = useState({ message: "", severity: "", id: null });
@@ -120,6 +122,7 @@ const Dashboard = () => {
                 <DefaultButton
                   onClick={handleSelectAllComponents}
                   variant="contained"
+                  title = "Seleccionar todos"
                 >
                   <div className={styles.buttonText}>
                     {selectedComponents.length === dataComponents.length ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
@@ -127,11 +130,20 @@ const Dashboard = () => {
                   </div>
                 </DefaultButton>
                 <DefaultButton
+                  // onClick={}
+                  disabled={selectedComponents.length === 0}
+                  variant="contained"
+                  title = "Descargar seleccionados"
+                >
+                  {<DownloadIcon />}
+                </DefaultButton>
+                <DefaultButton
                   onClick={handleRemoveSelectedComponents}
                   disabled={selectedComponents.length === 0}
                   variant="contained"
+                  title = "Eliminar seleccionados"
                 >
-                  Eliminar seleccionados
+                  {<DeleteIcon />}
                 </DefaultButton>
               </div>
               <div className={styles.dataDisplayModeContainer}>

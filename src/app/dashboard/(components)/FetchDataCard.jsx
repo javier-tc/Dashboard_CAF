@@ -11,7 +11,7 @@ import LoadingButtons from '@/components/button/LoadingButton';
 //icon
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
-const FetchDataCard = ({handleAddQuery, loading}) => {
+const FetchDataCard = ({ handleAddQuery, loading }) => {
     // Estados para guardar los datos obtenidos del backend
     const [years, setYears] = useState([]);
     const [fundos, setFundos] = useState([]);
@@ -34,30 +34,30 @@ const FetchDataCard = ({handleAddQuery, loading}) => {
 
     useEffect(() => {
         const fetchSelectors = async () => {
-          try {
-            setLoadingSelectors(true);
-            // console.log("Fetching selectors...");
-            const response = await api.get('/api/selectors');
-            const data = response.data;
-            // console.log("Data fetched:", data);
-            
-            setYears(data.years);
-            setFundos(data.fundos);
-            setPredios(data.predios);
-            setSectores(data.sectores);
-            setAtributos1(data.atributos1);
-            setAtributos2(data.atributos2);
-          } catch (err) {
-            console.error('Error:', err.message);
-            setError('Error al obtener datos del servidor');
-          } finally {
-            setLoadingSelectors(false);
-          }
+            try {
+                setLoadingSelectors(true);
+                // console.log("Fetching selectors...");
+                const response = await api.get('/api/selectors');
+                const data = response.data;
+                // console.log("Data fetched:", data);
+
+                setYears(data.years);
+                setFundos(data.fundos);
+                setPredios(data.predios);
+                setSectores(data.sectores);
+                setAtributos1(data.atributos1);
+                setAtributos2(data.atributos2);
+            } catch (err) {
+                console.error('Error:', err.message);
+                setError('Error al obtener datos del servidor');
+            } finally {
+                setLoadingSelectors(false);
+            }
         };
-      
+
         fetchSelectors();
-      }, []);
-      
+    }, []);
+
 
     useEffect(() => {
         setLoadingData(loading);
@@ -73,18 +73,20 @@ const FetchDataCard = ({handleAddQuery, loading}) => {
         <Maincard>
             <div className={styles.fetchDataContainer}>
                 <div className={styles.selectGroupContainer}>
-                    <BasicSelect
-                        label="Año"
-                        options={years}
-                        value={selectedYear}
-                        onChange={handleChangeYear}
-                    />
-                    <BasicSelect
-                        label="Fundo"
-                        options={fundos}
-                        value={selectedFundo}
-                        onChange={handleChangeFundo}
-                    />
+                    <div className={styles.sectoresContainer}>
+                        <BasicSelect
+                            label="Año"
+                            options={years}
+                            value={selectedYear}
+                            onChange={handleChangeYear}
+                        />
+                        <BasicSelect
+                            label="Fundo"
+                            options={fundos}
+                            value={selectedFundo}
+                            onChange={handleChangeFundo}
+                        />
+                    </div>
                     <MultipleSelectCheckmarks
                         label="Predios"
                         options={predios}
@@ -103,7 +105,7 @@ const FetchDataCard = ({handleAddQuery, loading}) => {
                                 />
                             ))
                         ) : (
-                            <p>No hay predios seleccionados</p>
+                            <p style={{ width: '180px', textAlign: 'center', alignContent: 'center' }}>No hay predios seleccionados</p>
                         )}
                     </div>
                     <div className={styles.sectoresContainer}>
@@ -125,7 +127,7 @@ const FetchDataCard = ({handleAddQuery, loading}) => {
                     <LoadingButtons
                         loading={loadingData}
                         onClick={handleAddQuery}
-                        text="Agregar consulta"
+                        text="Consultar"
                         icon={<QueryStatsIcon />}
                     />
                 </div>

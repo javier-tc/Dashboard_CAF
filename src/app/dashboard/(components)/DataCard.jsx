@@ -10,7 +10,7 @@ import DefaultCheckbox from '@/components/button/DefaultCheckbox';
 
 //icon
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import DownloadIcon from '@mui/icons-material/Download';
 
 // Dynamically import BasicLineChart
 const BasicLineChart = dynamic(() => import('@/components/charts/BasicLineChart'), { ssr: false });
@@ -28,6 +28,19 @@ const DataCard = ({ dataComponents, dataDisplayMode, handleRemoveComponent, sele
                     checked={selectedComponents.includes(component.id)}
                     onChange={() => handleSelectComponent(component.id)}
                   />
+                </div>
+                <div className={styles.removeButtonContainer}>
+                  {/* <Paper > */}
+                    <button
+                      onClick={(e) => {
+                        console.log("descargar componente", component.id);
+                      }}
+                      className={styles.downloadComponentButton}
+                      title="Descargar consulta"
+                    >
+                      <DownloadIcon />
+                    </button>
+                  {/* </Paper> */}
                 </div>
                 <div className={styles.removeButtonContainer}>
                   {/* <Paper > */}

@@ -12,6 +12,7 @@ export default function LoadingButtons({loading = false, text = "Save", icon = <
         startIcon={icon}
         variant="contained"
         onClick={onClick}
+        sx={{ width: 'auto' }}
       >
         {text}
       </LoadingButton>

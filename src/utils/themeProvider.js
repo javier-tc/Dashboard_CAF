@@ -30,6 +30,8 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     height: '40px',
+                    // maxWidth: '180px',
+                    // alignContent: 'center',
                     color: '#fff',
                     transition: 'all 0.3s ease',
                     // backgroundColor: '#386641ea',
@@ -83,7 +85,8 @@ const theme = createTheme({
                 root: {
                     // backgroundColor: '#6a994e', // Color de fondo para el encabezado
                     '& th': {
-                        color: '#ffffff', // Color del texto en el encabezado
+                        color:'#fff',
+                        // color: '#000', // Color del texto en el encabezado
                         fontWeight: 'bold',
                     }
                 },
@@ -96,7 +99,8 @@ const theme = createTheme({
                     color: '#14213d', // Color del texto
                 },
                 head: {
-                    backgroundColor: '#386641', // Color de fondo para las celdas del encabezado
+                    backgroundColor: '#6a994e', // Color de fondo para las celdas del encabezado
+                    // backgroundColor: '#a7c957', // Color de fondo para las celdas del encabezado
                     color: '#ffffff', // Color del texto del encabezado
                 },
             },
@@ -105,7 +109,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     '&:nth-of-type(odd)': {
-                        backgroundColor: '#d9e2db', // Color de fondo para las filas impares
+                        backgroundColor: '#fff', // Color de fondo para las filas impares
                     },
                     // '&:hover': {
                     //     backgroundColor: '#fff', // Color de fondo al hacer hover
