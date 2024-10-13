@@ -12,48 +12,48 @@ import DefaultCheckbox from '@/components/button/DefaultCheckbox';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
 
+//utils
+import downloadPDF from '@/utils/downloadComponent';
+
 // Dynamically import BasicLineChart
 const BasicLineChart = dynamic(() => import('@/components/charts/BasicLineChart'), { ssr: false });
 
-const DataCard = ({ dataComponents, dataDisplayMode, handleRemoveComponent, selectedComponents, handleSelectComponent }) => {
+const DataCard = ({ dataComponents, dataDisplayMode, handleRemoveComponent, selectedComponents, handleSelectComponent, handleDownloadComponent }) => {
   return (
     <div className={styles.resultsContainer}>
       {dataComponents.map((component) => (
         <div key={component.id} id={component.id} className={`${styles.resultItem} ${dataComponents.length === 1 ? styles.fullWidth : styles.halfWidth}`}>
           <Maincard >
             <div className={styles.dataContainer}>
-              <div className={styles.checkboxAndTextContainer}>
+              <div className={`${styles.checkboxAndTextContainer} no-pdf`}>
                 <div className={styles.checkboxContainer}>
                   <DefaultCheckbox
                     checked={selectedComponents.includes(component.id)}
                     onChange={() => handleSelectComponent(component.id)}
                   />
                 </div>
-                <div className={styles.removeButtonContainer}>
+                <div className={styles.buttonsContainer}>
                   {/* <Paper > */}
-                    <button
-                      onClick={(e) => {
-                        console.log("descargar componente", component.id);
-                      }}
-                      className={styles.downloadComponentButton}
-                      title="Descargar consulta"
-                    >
-                      <DownloadIcon />
-                    </button>
-                  {/* </Paper> */}
-                </div>
-                <div className={styles.removeButtonContainer}>
-                  {/* <Paper > */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveComponent(component.id);
-                      }}
-                      className={styles.removeComponentButton}
-                      title="Borrar consulta"
-                    >
-                      <DeleteIcon />
-                    </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownloadComponent([component.id]);
+                    }}
+                    className={styles.downloadComponentButton}
+                    title="Descargar consulta"
+                  >
+                    <DownloadIcon />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemoveComponent(component.id);
+                    }}
+                    className={styles.removeComponentButton}
+                    title="Borrar consulta"
+                  >
+                    <DeleteIcon />
+                  </button>
                   {/* </Paper> */}
                 </div>
               </div>

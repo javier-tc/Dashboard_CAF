@@ -41,11 +41,13 @@
         justify-content: center;
     }
     .dataDisplayModeContainer {
-        position: fixed;
+        position: absolute;
         top:0;
-        justify-content: center;
+        left: 195.2px;
+        transform: translateX(-50%);
+        /* justify-content: center; */
         margin-top: 10px;
-        width: 100%;
+        width: auto;
     }
 }
 

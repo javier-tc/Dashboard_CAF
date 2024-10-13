@@ -47,9 +47,14 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    /* padding-top: 10px; */
+    padding-bottom: 10px;
     gap: 5px;
 }
+
+.no-pdf {
+    display: none;
+  }
 
 .checkboxContainer {
     height: 20px;
@@ -58,6 +63,15 @@
     justify-content: center;
     align-items: center;
 }
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5px;
+}
+
 .removeComponentButton {
     display: flex;
     justify-content: center;
@@ -92,6 +106,7 @@
     color: var(--primary);
 }
 
+
 .dataTitle {
     display: flex;
     width: 100%;
@@ -107,12 +122,12 @@
 .halfwidthTableContainer {
     min-width: 350px;
     width: 100%;
-    max-width: 730px;
+    max-width: 700px;
 }
 
 .halfwidthGraphContainer {
     min-width: 350px;
     width: 100%;
-    max-width: 730px;
+    max-width: 700px;
 }
 

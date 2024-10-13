@@ -1,10 +1,11 @@
 // src/utils/ThemeProvider.js
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#6a994e',
+            main: '#386641',
         },
         secondary: {
             main: '#386641',
@@ -50,14 +51,14 @@ const theme = createTheme({
                     width: '40px',
                     '&.Mui-selected': {
                         color: '#fff', // Text color when selected
-                        backgroundColor: '#6a994e', // Primary color when selected
+                        backgroundColor: '#386641', // Primary color when selected
                         '&:hover': {
-                            backgroundColor: '#4f723a', // Secondary color on hover
+                            backgroundColor: '#386641', // Secondary color on hover
                         },
                     },
                     '&:hover': {
                         color: '#fff', // Text color on hover
-                        backgroundColor: '#6a994e', // Warning color on hover when not selected
+                        backgroundColor: '#386641', // Warning color on hover when not selected
                     },
                 },
             },
@@ -99,7 +100,7 @@ const theme = createTheme({
                     color: '#14213d', // Color del texto
                 },
                 head: {
-                    backgroundColor: '#6a994e', // Color de fondo para las celdas del encabezado
+                    backgroundColor: '#386641', // Color de fondo para las celdas del encabezado
                     // backgroundColor: '#a7c957', // Color de fondo para las celdas del encabezado
                     color: '#ffffff', // Color del texto del encabezado
                 },
@@ -120,7 +121,7 @@ const theme = createTheme({
         MuiChip: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#6a994e', // Color de fondo para los chips
+                    backgroundColor: '#386641', // Color de fondo para los chips
                     color: '#fff', // Color del texto para los chips
                 },
             },

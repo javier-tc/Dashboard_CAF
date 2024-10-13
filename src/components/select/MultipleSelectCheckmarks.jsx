@@ -19,7 +19,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      // width: 250,
+      // minWidth: '200px',
     },
   },
 };
@@ -37,38 +37,34 @@ export default function MultipleSelectCheckmarks({ label, options, selectedValue
   return (
     <Theme>
       <div className={styles.selectContainer}>
-        <FormControl
-          sx={{
-            m: 0,
-          }}
-        // variant='filled'
-        >
-          <InputLabel id="multiple-checkbox-label">{label}</InputLabel>
-          <Select
-            labelId="multiple-checkbox-label"
-            id="multiple-checkbox"
-            multiple
-            value={selectedValues}
-            onChange={handleChange}
-            input={<OutlinedInput label={label} />}
-            renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, padding: '10px 0px 10px 0px'}}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
-              </Box>
-            )}
+          <FormControl fullWidth>
+            <InputLabel id="multiple-checkbox-label">{label}</InputLabel>
+            <Select
+              labelId="multiple-checkbox-label"
+              id="multiple-checkbox"
+              multiple
+              value={selectedValues}
+              onChange={handleChange}
+              input={<OutlinedInput label={label} />}
+              sx={{ minWidth: '200px', cursor: 'pointer' }}
+              renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, padding: '10px 0px 10px 0px' }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              )}
 
-            MenuProps={MenuProps}
-          >
-            {options.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                <Checkbox checked={selectedValues.includes(option.value)} />
-                <ListItemText primary={option.label} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+              MenuProps={MenuProps}
+            >
+              {options.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  <Checkbox checked={selectedValues.includes(option.value)} />
+                  <ListItemText primary={option.label} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
       </div>
     </Theme>
   );

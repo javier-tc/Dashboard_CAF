@@ -93,6 +93,18 @@ export default function BasicTable({ columns, data, columnGroups }) {
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
+                    sx={{
+                        '& .MuiTablePagination-toolbar': {
+                            xs: {
+                                padding: '5px',
+                            },
+                            '& .MuiTablePagination-actions': {
+                                xs: {
+                                    margin: '0px',
+                                }
+                            }
+                        }
+                    }}
                 />
             </Paper>
         </Theme>

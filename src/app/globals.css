@@ -73,6 +73,12 @@ a {
   padding: 10px;
 }
 
+@media (max-width: 600px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

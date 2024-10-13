@@ -21,6 +21,9 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+//utils
+import downloadPDF from '@/utils/downloadComponent';
+
 const Dashboard = () => {
   const [snackbar, setSnackbar] = useState({ message: "", severity: "", id: null });
   const [dataDisplayMode, setDataDisplayMode] = useState('table');
@@ -98,6 +101,16 @@ const Dashboard = () => {
     showSnackbar("Se han eliminado las consultas seleccionadas.", "error");
   };
 
+  const handleDownloadSelectedComponents = () => {
+    downloadPDF(selectedComponents);
+    showSnackbar("Se está generando el PDF.", "info");
+  };
+
+  const handleDownloadComponent = (selectedComponents) => {
+    downloadPDF(selectedComponents);
+    showSnackbar("Se está generando el PDF.", "info");
+  }
+
   return (
     <SnackbarProvider
       maxSnack={2}
@@ -130,7 +143,7 @@ const Dashboard = () => {
                   </div>
                 </DefaultButton>
                 <DefaultButton
-                  // onClick={}
+                  onClick={handleDownloadSelectedComponents}
                   disabled={selectedComponents.length === 0}
                   variant="contained"
                   title = "Descargar seleccionados"
@@ -162,6 +175,7 @@ const Dashboard = () => {
           handleRemoveComponent={handleRemoveComponent}
           selectedComponents={selectedComponents}
           handleSelectComponent={handleSelectComponent}
+          handleDownloadComponent={handleDownloadComponent}
         />
 
         {snackbar.message && (
