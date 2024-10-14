@@ -102,9 +102,11 @@ const Dashboard = () => {
   };
 
   const handleDownloadSelectedComponents = () => {
-    downloadPDF(selectedComponents);
+    const selectedDataComponents = dataComponents.filter(comp => selectedComponents.includes(comp.id));
+    downloadPDF(selectedDataComponents);
     showSnackbar("Se está generando el PDF.", "info");
   };
+  
 
   const handleDownloadComponent = (selectedComponents) => {
     downloadPDF(selectedComponents);

@@ -13,7 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
 
 //utils
-import downloadPDF from '@/utils/downloadComponent';
+// import downloadPDF from '@/utils/downloadComponent';
 
 // Dynamically import BasicLineChart
 const BasicLineChart = dynamic(() => import('@/components/charts/BasicLineChart'), { ssr: false });
@@ -37,7 +37,7 @@ const DataCard = ({ dataComponents, dataDisplayMode, handleRemoveComponent, sele
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleDownloadComponent([component.id]);
+                      handleDownloadComponent([component]);
                     }}
                     className={styles.downloadComponentButton}
                     title="Descargar consulta"
